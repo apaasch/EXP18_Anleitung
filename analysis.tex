@@ -42,39 +42,34 @@ cd mydir
 In diesem Ordner f\"uhren Sie den Versuch durch und speichern alle Ergebnisse.
 %Hinweis: Sie loggen sich mit einem Gast-Konto ein. Bringen Sie bitte au\ss{}erdem f\"ur Ihre Auswertung einen USB-Stick mit, um Ihre Ergebnisse zu sichern. Die zur Verf\"ugung gestellten Rechner arbeiten im Offline-Betrieb.
 \subsection{Event Displays mit dem iSpy Webinterface}
-Das iSpy Webinterface ermöglicht es die Prozesse w\"arend einer Kollision und die Signale im Detektor darzustellen. Sie finden das Program unter der Webseite https://ispy-webgl.web.cern.ch/
-\begin{lstlisting}
-cp -r /opt/fp/cmsShow-8.1 .
-cp -r /opt/fp/sources .
-\end{lstlisting}
-Sie betrachten im Folgenden ein Sample mit 400 simulierten $t\bar{t}$-Ereignissen. \"Offnen Sie das $t\bar{t}$-Sample wie folgt:
-\begin{lstlisting}
-cd cmsShow-8.1
-./cmsShow ../sources/ttbar.root
-\end{lstlisting}
+Das iSpy Webinterface ermöglicht es die Prozesse w\"arend einer Kollision und die Signale im Detektor darzustellen. Sie finden die iSpy-Web-App auf \url{https://ispy-webgl.web.cern.ch/}. Zusätzlich werden zwei Datensätze mit Event-Displays benötigt, diese finden Sie hier:
+\begin{itemize}
+	\item  $t\bar{t}$ Datensatz:\\ \url{https://www.desy.de/~froehlia/EXP18_files/ttbar_7TeV_0.ig}
+	\item  Single-Top Datensatz:\\ \url{https://www.desy.de/~froehlia/EXP18_files/singlet_tw_7TeV_0.ig}
+\end{itemize}
+Sie k\"onnen das Sample auf dem lokalen PC direkt in der iSpy-Web-App öffnen indem Sie oben links auf das Ordner Symbol klicken.
+In dem Menü oben rechts können sie die Objekte und Komponenten vom Detektor einstellen, die angezeigt werden sollen. 
+\"Offnen sie zunächst das $t\bar{t}$ Sample.
 Machen Sie sich nun mit der Software vertraut:
 \begin{itemize}
 \item betrachten Sie verschiedene Ereignisse
 \item machen Sie sich klar, welche Anzeigen welche Objekte darstellen
-\item betrachten Sie Ereignisse in der Rho-Z-Achse sowie im 3D-Tower.
+\item betrachten Sie Ereignisse in verschiedenen Perspektiven.
 \end{itemize}
-Versuchen Sie nun jeweils ein Ereignis f\"ur den voll-hadronischen, semi-leptonen und di-leptonen Zerfallskanal zu klassifizieren. Benutzen Sie daraufhin die Filter-Funktion. Passen Sie diese so an, dass m\"oglichst ausschlie{\ss}lich $t\bar{t}$-Ereignisse im semi-leptonischen Zerfallskanal betrachtet werden. Speichern Sie (mindestens) ein Event-Display f\"ur Ihre Auswertung!\\
+Versuchen Sie nun jeweils ein Ereignis f\"ur den voll-hadronischen, semi-leptonen und di-leptonen Zerfallskanal zu klassifizieren. Benutzen Sie daraufhin die Filter-Funktion. Passen Sie diese so an, dass m\"oglichst ausschlie{\ss}lich $t\bar{t}$-Ereignisse im semi-leptonischen Zerfallskanal betrachtet werden. Speichern Sie (mindestens) ein Event-Display f\"ur Ihre Auswertung in der XY-Ebene!\\
 \\
 Betrachten Sie nun Event-Displays aus einem Single-Top-Sample:
-\begin{lstlisting}
-./cmsShow ../sources/singletop.root
-\end{lstlisting}
-K\"onnen Sie Unterschiede feststellen, die Ihnen bei der Selektion von $t\bar{t}$-Ereignissen helfen? Speichern Sie f\"ur Ihre Auswertung ein Event-Display mit einem Single-Top-Ereignis.
+K\"onnen Sie Unterschiede feststellen, die Ihnen bei der Selektion von $t\bar{t}$-Ereignissen helfen? 
+Speichern Sie f\"ur Ihre Auswertung ein Event-Display mit einem Single-Top-Ereignis.
 
 \subsection{Einf\"uhrung in das Analyse-Framework}
 Unser Analyse-Framework ist bereits voll funktionsf\"ahig, jedoch macht es bislang nicht viel. Setzen Sie das Analyse-Framework auf und f\"uhren Sie es ein erstes Mal aus:
 \begin{itemize}
 	%\item erstellen Sie zun\"achst im Home-Verzeichnis einen neuen Ordner
-	\item entpacken Sie dazu das Paket TopWQS.tar.gz mit 'tar -xf sources/TopWQS.tar.gz' in Ihren Ordner
-	\item kompilieren Sie mit 'make'. Das Kompilieren erstellt Ihnen eine ausf\"uhrbare Datei \textbf{example.x}
-	\item nun kann das Framework ausgef\"uhrt werden mit './example.x'
+	\item kopieren sie den Code von GitHub mit 'git clone git@github.com:apaasch/UHH\_EXP18\_LHC-Analysis.git',
+	\item und führen Sie die Analyse mit 'python my\_analysis.py' aus.
 \end{itemize}
-Das Programm schreibt bereits Output-Dateien (wie z.B. \textbf{nocuts.pdf}), die Verteilungen der Analyse beinhalten. \"Offnen Sie die Dateien mit einem PDF-Viewer, wie z.B. \textbf{xpdf/okular}. Im Folgenden arbeiten Sie haupts\"achlich in den Dateien 'MyAnalysis.C', 'MyAnalysis.h' und 'example.C'. \"Offnen Sie diese mit einem Editor, z.B. Emacs, mit 'emacs MyAnalysis.C'. Machen Sie sich zu Beginn mit dem Code vertraut.
+Das Programm schreibt bereits Output-Dateien (wie z.B. \textbf{nocuts.pdf}), die Verteilungen der Analyse beinhalten. \"Offnen Sie die Dateien mit einem PDF-Viewer, wie z.B. \textbf{xpdf/okular}. Im Folgenden arbeiten Sie haupts\"achlich in den Dateien 'my\_analysis.py' und 'TTbarAnalyzer.py'. \"Offnen Sie diese mit einem Editor, z.B. Emacs, mit 'emacs my\_analysis.py'. Machen Sie sich zu Beginn mit dem Code vertraut.
 
 \subsection{Aufgabe 1: Eigenschaften von Top-Quark-Ereignissen}
 In der Datei \textbf{nocuts.pdf} finden Sie verschiedene Verteilungen, wie z.B. die Anzahl der Myonen, Muon $p_{T}$, Anzahl der Jets, etc. in einem Ereignis. \\
@@ -174,13 +169,13 @@ M_{\text{t}}^{\text{rec}} = \frac{M_{\text{t}}^{\text{lep}} + M_{\text{t}}^{\tex
 Nun sollen Sie die obigen Schritte in der Praxis anwenden und optimieren. Die Analysesoftware enth"alt bereits alle n"otigen Funktionen, um die Schritte 1 - 3 aus dem vorigen Kapitel durchzuf"uhren. 
 
 \begin{itemize}
-\item Verifizieren Sie, dass die Funktionen MyAnalysis::ReconstructTTbar und MyAnalysis::SelectBestTTbarHypothesis die Schritte 1-2 und 3 repr"asentieren und verstehen Sie den Aufbau der Funktionen. 
+\item Verifizieren Sie, dass die Funktionen in 'TopReco.py' die Schritte 1-2 und 3 repr"asentieren und verstehen Sie den Aufbau der Funktionen. 
 
 \item Fordern Sie in einer neuen Selektion mindestens 3 Jets in jeden Ereignis. Setzen Sie die Variable ''m\_top\_avg'' gem"a"s der in Gleichung \ref{eq:mtoprec} gegebenen Definition. Falls Sie Erfolg haben, wird das letzte Histogramm in der Liste nun mit dieser Variable gef"ullt werden.
 
 \item Optimiern Sie diese Selektion, bei der Sie gr"o"stenteils Top-Antitop-Ereignisse selektieren, ohne unn"otig viele Ereignisse zu verwerfen. \textit{Hinweis: Sie sollten nicht mehr als eine oder zwei andere Variablen (zus"atzlich zur Anzahl an Jets) verwenden. "Uberlegen Sie, welche Variablen f"ur die im vorigen Kapitel beschriebene Rekonstruktion hilfreich war!}
 
-\item Modifizieren Sie die Art der Rekonstruktion, indem Sie die Mindestzahl der im hadronischen Top Quark verwendeten Jets variieren (ganzzahlige Werte zwischen 2 und 4). Hierf"ur k"onnen sie das Argument der Funktion MyAnalysis::ReconstructTTbar verwenden, das im Moment auf 3 eingestellt ist. Bei welcher Mindestanzahl erscheint der Peak bei der Top Quark Masse am sch"arfsten? Was k"onnte Grund daf"ur sein?
+\item Modifizieren Sie die Art der Rekonstruktion, indem Sie die Mindestzahl der im hadronischen Top Quark verwendeten Jets variieren (ganzzahlige Werte zwischen 2 und 4). Hierf"ur k"onnen sie das Argument der Funktion 'TopReco' in dem 'TTbarAnalyzer.py' Modul verwenden. Bei welcher Mindestanzahl erscheint der Peak bei der Top Quark Masse am sch"arfsten? Was k"onnte Grund daf"ur sein?
 
 \item \textbf{BONUS:} Sie k"onnen ebenso die maximal zul"assige Massendifferenz zwischen hadronischer und leptonischer rekonstruierter Top Quark Masse variieren. Finden Sie heraus, wie, und probieren Sie unterschiedliche Werte aus! Was beobachten Sie? K"onnen Sie einen besseren Wert als 10\,GeV finden?
 
@@ -193,7 +188,7 @@ Ihr gemessener Wert der Top Quark Masse wird in diesem Versuch ermittelt, indem 
 F"ur die Messung wird die Verteilung in Daten abz"uglich der Untergr"unde verwendet. Dies wurde bereits f"ur Sie implementiert.
 
 \begin{itemize}
-\item Modifizieren Sie den Code in der Datei example.C und aktivieren Sie den Fit! Experimentieren Sie mit der oberen und unteren Grenze des Fits, beachten Sie jedoch, dass stets nur der zentrale Teil der Verteilung gefittet werden sollte.
+\item Modifizieren Sie den Code in der Datei my\_analysis.py und aktivieren Sie den Fit! Experimentieren Sie mit der oberen und unteren Grenze des Fits, beachten Sie jedoch, dass stets nur der zentrale Teil der Verteilung gefittet werden sollte.
 
 \item Ermitteln Sie den Wert und die statistische Unsicherheit der mit Ihrer Selektion und Methode (s.o.) ermittelten rekonstruierten Top Quark Masse.
 
